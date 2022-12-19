@@ -47,95 +47,14 @@ int main()
     return 0;    
 }
 
-void map(const sf::RenderWindow& window, std::vector<rect>& boards)
+void map(const sf::RenderWindow& window, std::vector<rect>& boards,std::vector<std::map<std::string,double>> json)
 {
 
-    /*std::ifstream mapJson("map.json", std::ifstream::binary);
-    std::string json;
-    mapJson >> json;
-    std::cout << json;
-    logl(json);
-
-    for (auto jsonx : json)
-    {
-        std::cout << jsonx["x"] << jsonx["y"];
-    }*/
-
-
-    // ГРАНИЦА КАРТЫ
-    boards[0].setCharacteristics(0, 0, passageSize*9, 1);
-    //boards[0].setCharacteristics(boardSize, boardSize, mapSizeX - boardSize * 2 - passageSize / 2, boardSize);
-    boards[1].setCharacteristics(passageSize*9, 0, 1, passageSize*3);
-    //boards[1].setCharacteristics(mapSizeX - boardSize * 2, boardSize, boardSize, mapSizeY / 2 + boardSize * 2 - passageSize / 2);
-    boards[2].setCharacteristics(0, passageSize*7, passageSize*9, 1);
-    //boards[2].setCharacteristics(boardSize, mapSizeX - boardSize * 2, mapSizeX - boardSize * 2, boardSize);
-    boards[3].setCharacteristics(0, 0, 1, passageSize*3);
-    //boards[3].setCharacteristics(boardSize, boardSize, boardSize, mapSizeY / 2 - boardSize * 2 - passageSize / 2);
-    boards[4].setCharacteristics(0, passageSize*4, 1, passageSize*3);
-    //boards[4].setCharacteristics(boardSize, mapSizeY / 2 - boardSize * 2 + passageSize / 2, boardSize, mapSizeY / 2 + boardSize * 2 - passageSize / 2);
-    boards[5].setCharacteristics(passageSize*9, passageSize*4, 1,passageSize*3);
-    //boards[5].setCharacteristics(mapSizeX - boardSize * 2, mapSizeY / 2 + passageSize / 2, boardSize, mapSizeY / 2 - boardSize * 2 - passageSize / 2);
-    boards[6].setCharacteristics(0, passageSize *4, passageSize, 1);
-    //boards[6].setCharacteristics(boardSize, mapSizeY / 2 - boardSize / 2 + passageSize / 2, passageSize, boardSize);
-    boards[7].setCharacteristics(0, passageSize *3, passageSize, 1);
-    boards[8].setCharacteristics(passageSize, passageSize, 1, passageSize * 2);
-    boards[9].setCharacteristics(passageSize, passageSize*4, 1, passageSize * 2);
-    boards[10].setCharacteristics(passageSize, passageSize*6, passageSize, 1);
-
-
-    boards[9].setCharacteristics(passageSize * 2, 0, 1, passageSize * 5);
-    boards[10].setCharacteristics(passageSize * 3, passageSize, 1, passageSize * 4);
-    boards[11].setCharacteristics(passageSize * 3, passageSize * 6, 1, passageSize);
-
-    boards[12].setCharacteristics(passageSize * 4, 0, 1, passageSize);
-    boards[13].setCharacteristics(passageSize * 4, passageSize * 2, 1, passageSize*5);
-    boards[14].setCharacteristics(passageSize * 4, passageSize, passageSize, 1);
-
-    boards[15].setCharacteristics(passageSize * 5, passageSize * 2, 1, passageSize*4);
-    boards[16].setCharacteristics(passageSize * 6, passageSize, passageSize * 3, 1);
-    boards[17].setCharacteristics(passageSize * 6, passageSize, 1, passageSize);
-    boards[18].setCharacteristics(passageSize * 6, passageSize*3, 1, passageSize*3);
-    boards[19].setCharacteristics(passageSize * 7, passageSize, passageSize*2, 1);
-    boards[20].setCharacteristics(passageSize * 7, passageSize*2, 1, passageSize);
-    boards[21].setCharacteristics(passageSize * 7, passageSize*3, passageSize, 1);
-    boards[22].setCharacteristics(passageSize * 7, passageSize*4, passageSize, 1);
-    boards[23].setCharacteristics(passageSize * 7, passageSize * 5, 1, passageSize);
-    boards[24].setCharacteristics(passageSize * 7, passageSize * 6, passageSize, 1);
-    boards[25].setCharacteristics(passageSize * 8, passageSize * 3, 1, passageSize);
-    boards[26].setCharacteristics(passageSize * 8, passageSize * 5, passageSize, 1);
-    boards[27].setCharacteristics(passageSize * 8, passageSize * 5, 1, passageSize);
-
-    boards[28].setCharacteristics(passageSize, passageSize * 4, 1, passageSize * 2);
-    boards[29].setCharacteristics(passageSize, passageSize * 6, passageSize, 1);
-    boards[30].setCharacteristics(passageSize*3, passageSize * 5, passageSize, 1);
-    boards[31].setCharacteristics(passageSize*4, passageSize * 2, passageSize,1);
-    boards[32].setCharacteristics(passageSize*7, passageSize * 2, passageSize*2, 1);
-
-
-
-
-
-
-
-
-
-
-    //boards[19].setCharacteristics(passageSize * 6, passageSize, passageSize,1);
-    //boards[21].setCharacteristics(passageSize * 6, passageSize * 3, 1, passageSize * 2);
-    //boards[20].setCharacteristics(passageSize * 7, passageSize, 1, passageSize);
-
-
-
-
-
-
-
-
-
-
-    // СТЕНЫ ВНУТРИ КАРТЫ
-
-
+    int count = 0;
+    for (auto element : json) {
+        boards[count++].setCharacteristics(element["x"], element["y"], element["size_x"], element["size_y"]);
+    }
+   
 }
 
 std::pair<std::pair<double, double>, int> solveX(const double& a, const double& b, const double& c)
