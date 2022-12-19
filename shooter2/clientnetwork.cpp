@@ -82,8 +82,12 @@ void ClientNetwork::Run()
             player player1;
             rect* walls = new rect[countRays];
             
-            std::vector<rect> boards(33);
-            map(window, boards);
+            std::vector<rect> boards(36);
+            std::ifstream json("map.txt");
+            if (!json.is_open()) {
+                std::cout << 0;
+            }
+            map(window, boards, jsonGet(json));
 
             std::vector<rect> playersView;
 
@@ -203,7 +207,7 @@ void ClientNetwork::Run()
 
 
 
-                //Отрисовка мира
+                //ГЋГІГ°ГЁГ±Г®ГўГЄГ  Г¬ГЁГ°Г 
 
                 sf::RectangleShape backGround(sf::Vector2f(0, 0));
                 backGround.setSize(sf::Vector2f(worldSizeX, worldSizeY / 2));
@@ -295,7 +299,7 @@ void ClientNetwork::Run()
 
                 //window.draw(player1.view.rectangle);
 
-                //Отрисовка мини-карты
+                //ГЋГІГ°ГЁГ±Г®ГўГЄГ  Г¬ГЁГ­ГЁ-ГЄГ Г°ГІГ»
                /*sf::RectangleShape mapBackGround;
                 mapBackGround.setSize(sf::Vector2f(passageSize*9, passageSize * 7));
                 mapBackGround.setFillColor(sf::Color(3, 3, 20));
